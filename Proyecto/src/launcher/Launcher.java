@@ -11,6 +11,7 @@ public class Launcher {
             public void run() {
             	Student alumno = new Student( 125970, "Paillamilla", "Leonardo", "leonardopaillamilla@yahoo.com.ar", "https://github.com/ByLeo-native/TD-Proyecto1", "");
             	SimplePresentationScreen presentacion = new SimplePresentationScreen(alumno);
+            	presentacion.setVisible(true);
             }
         });
     }
