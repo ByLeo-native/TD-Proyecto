@@ -1,5 +1,6 @@
 package launcher;
 
+import entities.Student;
 import gui.SimplePresentationScreen;
 
 public class Launcher {
@@ -8,7 +9,8 @@ public class Launcher {
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-            	SimplePresentationScreen presentacion = new SimplePresentationScreen();
+            	Student alumno = new Student( 125970, "Paillamilla", "Leonardo", "leonardopaillamilla@yahoo.com.ar", "https://github.com/ByLeo-native/TD-Proyecto1", "");
+            	SimplePresentationScreen presentacion = new SimplePresentationScreen(alumno);
             }
         });
     }
