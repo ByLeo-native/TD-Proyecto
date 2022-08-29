@@ -1,1 +1,8 @@
 /bin/
+/.metadata/
+#Ignora los archivos de configuracion del proyecto en la IDE
+.classpath
+.project
+
+#Ignora los archivos compilados
+bin

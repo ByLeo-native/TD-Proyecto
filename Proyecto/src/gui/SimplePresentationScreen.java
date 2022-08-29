@@ -3,7 +3,15 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Time;
+import java.time.LocalDateTime;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,7 +29,7 @@ public class SimplePresentationScreen extends JFrame {
 	private JPanel pnLabels, pnDatos;
 	private JTabbedPane tabbedPane;
 	private Student studentData;
-	private JLabel lbLibretaUniversitaria, lbApellido, lbNombre, lbEmail, lbRepositorio;
+	private JLabel lbLibretaUniversitaria, lbApellido, lbNombre, lbEmail, lbRepositorio, lbIcono, lbGeneracionDeVentana;
 	private JTextField tfLibretaUniversitaria, tfApellido, tfNombre, tfEmail, tfRepositorio;
 	
 	public SimplePresentationScreen(Student studentData) {
@@ -37,12 +45,16 @@ public class SimplePresentationScreen extends JFrame {
 		setResizable(false);
 		setContentPane(contentPane);
 		
+		Image icon = new ImageIcon("C:\\Users\\Abril\\Desktop\\ISI\\Tecnologia de la Programacion\\tdp-proyecto-1\\proyecto-1\\src\\images\\tdp.png").getImage();
+		setIconImage(icon);
 		init();
 		
 		armarPaneles();
 		armarLabel();
 		armarInput();
 		this.cargarDatos();
+		this.agregarIcono();
+		this.datoDeGeneracion();
 	}
 	
 	private void init() {
@@ -141,6 +153,29 @@ public class SimplePresentationScreen extends JFrame {
 	}
 	
 	private void datoDeGeneracion() {
+		LocalDateTime localTime = LocalDateTime.now();
+		String texto = "Esta ventana fue generada el "+localTime.getDayOfMonth()+"/"+localTime.getMonthValue()+"/"+localTime.getYear()+" a las "+localTime.getHour()+":"+localTime.getMinute()+":"+localTime.getSecond();
+		lbGeneracionDeVentana = new JLabel(texto);
+		lbGeneracionDeVentana.setBounds(8, 270, 100, 20);
+		lbGeneracionDeVentana.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		getContentPane().add(lbGeneracionDeVentana, BorderLayout.PAGE_END);
 		
+	}
+	
+	private void agregarIcono() {
+		File directory = new File("C:\\Users\\Abril\\Desktop\\ISI\\Tecnologia de la Programacion\\tdp-proyecto-1\\proyecto-1\\Proyecto\\src\\images");
+		
+		try {
+			BufferedImage bufferedImage = null;
+			for(File file: directory.listFiles()) {
+				bufferedImage = ImageIO.read(file);
+			}
+			ImageIcon imageIcon = new ImageIcon(bufferedImage.getScaledInstance(154, 154, Image.SCALE_DEFAULT));
+			lbIcono = new JLabel();
+			lbIcono.setIcon(imageIcon);
+			contentPane.add(lbIcono, BorderLayout.EAST);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
